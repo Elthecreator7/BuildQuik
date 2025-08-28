@@ -1,12 +1,10 @@
-import { Button } from '@/components/ui/button'
 import React from 'react'
 
-const page = () => {
+const page = async () => {
+ 
   return (
     <div>
-      <Button variant='destructive'>
-        Click Me
-      </Button>
+      Sup bitches
     </div>
   )
 }
