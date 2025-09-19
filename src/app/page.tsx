@@ -19,7 +19,7 @@ const page =  () => {
  return (
     <div className='p-4 max-w-7xl mx-auto'>
       <Input value={value} onChange={((e)=> setValue(e.target.value))}></Input>
-      <Button disabled= {invoke.isPending} onClick={()=> invoke.mutate({value: value})}>Invoke Background Component</Button>
+      <Button disabled= {invoke.isPending} onClick={()=> invoke.mutate({value: value})}>Build</Button>
     </div>
   )
 }
