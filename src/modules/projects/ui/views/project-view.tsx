@@ -4,6 +4,7 @@ import React, { Suspense, useState } from 'react'
 import MessagesContainer from '../components/MessagesContainer';
 import { Fragment } from '@/generated/prisma';
 import { ProjectHeader } from '../components/ProjectHeader';
+import { FragmentWeb } from '../components/FragmentWeb';
 
 interface Props {
     projectId: string;
@@ -20,15 +21,15 @@ export const ProjectView = ({ projectId }: Props) => {
                     minSize={20}
                     className='flex flex-col min-h-0'
                 >
-                    <Suspense fallback = {<p>Loading Project...</p>}>
-                        <ProjectHeader projectId = {projectId}></ProjectHeader>
+                    <Suspense fallback={<p>Loading Project...</p>}>
+                        <ProjectHeader projectId={projectId}></ProjectHeader>
                     </Suspense>
                     <Suspense fallback={<p>Loading messages...</p>}>
-                        <MessagesContainer 
-                        projectId={projectId}
-                        activeFragment = {activeFragment}
-                        setActiveFragment = {setActiveFragment}
-></MessagesContainer>
+                        <MessagesContainer
+                            projectId={projectId}
+                            activeFragment={activeFragment}
+                            setActiveFragment={setActiveFragment}
+                        ></MessagesContainer>
                     </Suspense>
                 </ResizablePanel>
                 <ResizableHandle withHandle></ResizableHandle>
@@ -36,7 +37,7 @@ export const ProjectView = ({ projectId }: Props) => {
                     defaultSize={65}
                     minSize={50}
                 >
-                    TODO: Preview
+                    {!!activeFragment && <FragmentWeb data = {activeFragment}></FragmentWeb>}
                 </ResizablePanel>
             </ResizablePanelGroup>
         </div>
