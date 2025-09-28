@@ -11,14 +11,14 @@ const page = () => {
       <section className='space-y-6 py-[16vh] 2xl:py-48'>
         <div className='flex flex-col items-center'>
           <Image
-            src="/logo.jpg"
+            src="/logo4.png"
             alt='brix'
-            width={90}
-            height={90}
+            width={120}
+            height={120}
             className='hidden md:block rounded-full'
           ></Image>
         </div>
-        <h1 className='text-2xl md:text-5xl font-bold text-center'>
+        <h1 className='text-2xl md:text-5xl font-bold text-center bg-gradient-to-b from-purple-600 to-red-600 text-transparent bg-clip-text'>
           Build with Brix
         </h1>
         <p className='text-lg md:text-xl text-muted-foreground text-center'>Create apps and websites from a single prompt</p>

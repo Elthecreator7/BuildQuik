@@ -123,10 +123,10 @@ export const ProjectForm = () => {
                                 key={template.title}
                                 variant="outline"
                                 size="sm"
-                                className='bg-white dark:bg-sidebar'
+                                className='bg-white dark:bg-sidebar hover:text-[#ff00c8]'
                                 onClick={() => onSelect(template.prompt)}
                             >
-                                {typeof Emoji === 'string' ? <span className="mr-2">{Emoji}</span> : <Emoji className="mr-2 text-[#7c0fab]" />}
+                                {typeof Emoji === 'string' ? <span className="mr-2">{Emoji}</span> : <Emoji className="mr-2 text-[#ff00c8]" />}
                                 {template.title}
                             </Button>
                         );
