@@ -10,6 +10,7 @@ import { CodeIcon, CrownIcon, EyeIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FileExplore } from '@/components/file-explorer';
+import { UserControl } from '@/components/user-control';
 
 interface Props {
     projectId: string;
@@ -55,16 +56,17 @@ export const ProjectView = ({ projectId }: Props) => {
                                 <TabsTrigger value='preview' className='rounded-md'>
                                     <EyeIcon></EyeIcon><span>Demo</span>
                                 </TabsTrigger>
-                                  <TabsTrigger value='code' className='rounded-md'>
+                                <TabsTrigger value='code' className='rounded-md'>
                                     <CodeIcon></CodeIcon><span>Code</span>
                                 </TabsTrigger>
                             </TabsList>
                             <div className='ml-auto flex items-center gap-x-2'>
                                 <Button asChild size="sm" variant="luscent">
                                     <Link href='/pricing'>
-                                    <CrownIcon></CrownIcon>Upgrade
+                                        <CrownIcon></CrownIcon>Upgrade
                                     </Link>
                                 </Button>
+                                <UserControl></UserControl>
                             </div>
                         </div>
                         <TabsContent value='preview'>
@@ -72,8 +74,8 @@ export const ProjectView = ({ projectId }: Props) => {
                         </TabsContent>
                         <TabsContent value='code' className='min-h-0'>
                             {!!activeFragment?.files && (
-                                <FileExplore 
-                                files={activeFragment.files as { [path: string]: string }}
+                                <FileExplore
+                                    files={activeFragment.files as { [path: string]: string }}
                                 ></FileExplore>
                             )}
                         </TabsContent>
