@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils';
 import { useTRPC } from '@/trpc/client';
 import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
+import { Usage } from './Usage';
+import { useRouter } from 'next/navigation';
 
 
 interface Props {
@@ -24,7 +26,12 @@ const formSchema = z.object({
 
 export const MessageForm = ({ projectId }: Props) => {
     const trpc = useTRPC();
+    const router = useRouter();
     const queryClient = useQueryClient();
+
+    const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -38,11 +45,16 @@ export const MessageForm = ({ projectId }: Props) => {
             queryClient.invalidateQueries(
                 trpc.messages.getMany.queryOptions({ projectId })
             );
-           // TODO: INVALIDATE USAGE STATUS
+            queryClient.invalidateQueries(
+                trpc.usage.status.queryOptions()
+            );
         },
-        onError: (error) =>{
-            //TODO redirect to pricing page if specific error
+        onError: (error) => {
             toast.error(error.message);
+
+            if(error.data?.code === "TOO_MANY_REQUESTS"){
+                router.push("/pricing");
+            }
         }
     }));
 
@@ -54,12 +66,18 @@ export const MessageForm = ({ projectId }: Props) => {
     };
 
     const [isFocused, setIsFocused] = useState(false);
-    const showUsage = false;
+    const showUsage = !!usage;
     const isPending = createMessage.isPending;
     const isButtonDisabled = isPending || !form.formState.isValid
 
     return (
         <Form {...form}>
+            {showUsage && (
+                <Usage
+                    points={usage.remainingPoints}
+                    msBeforeNextRefresh={usage.msBeforeNext}
+                ></Usage>
+            )}
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className={cn(
