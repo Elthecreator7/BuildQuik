@@ -9,13 +9,20 @@ const page = () => {
   return (
     <div className='flex flex-col max-w-5xl mx-auto w-full'>
       <section className='space-y-6 py-[16vh] 2xl:py-48'>
-        <div className='flex flex-col items-center'>
+        <div className='flex items-center justify-center gap-3'>
           <Image
             src="/logo4.png"
             alt='brix'
             width={120}
             height={120}
             className='hidden md:block rounded-full'
+          ></Image>
+          <Image
+          src = "/Digivo-Logo.png"
+          alt='digivo'
+          width={150}
+          height={150}
+          className='hidden md:block mt-4'
           ></Image>
         </div>
         <h1 className='text-2xl md:text-5xl font-bold text-center bg-gradient-to-b from-purple-600 to-red-600 text-transparent bg-clip-text'>
